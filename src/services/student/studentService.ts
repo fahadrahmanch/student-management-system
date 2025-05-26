@@ -1,4 +1,4 @@
-import{IstudentService} from '../../services/student/IstudentService'
+import{IstudentService} from './IstudentService'
 import { IUser } from '../../interfaces/User';
 import{studentRepository} from '../../repositories/student/studentRepository'
 import { User } from '../../models/user';  

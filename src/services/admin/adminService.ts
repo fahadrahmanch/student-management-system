@@ -1,5 +1,5 @@
 import { IUser } from '../../interfaces/User'
-import{IadminService} from '../../services/admin/IadminService'
+import{IadminService} from './IadminService'
 import{BcryptService} from '../../utils/bycrpt'
 import{adminRepository} from '../../repositories/admin/adminRepository'
 export class adminServices implements IadminService{

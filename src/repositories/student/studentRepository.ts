@@ -1,4 +1,4 @@
-import{IstudentRepository} from '../../repositories/student/InterfaceStudentRepository'
+import{IstudentRepository} from './InterfaceStudentRepository'
 import{User} from '../../models/user'
 import{IUser} from '../../interfaces/User'
 

@@ -1,4 +1,4 @@
-import{IadminRepository} from '../../repositories/admin/InterfaceAdminRepository'
+import{IadminRepository} from './InterfaceAdminRepository'
 import{User} from '../../models/user'
 import{IUser} from '../../interfaces/User'
 export class adminRepository implements IadminRepository{
