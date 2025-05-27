@@ -7,17 +7,18 @@ export class studentRepository implements IstudentRepository{
 
     }
     async createStudent(student:IUser):Promise<any>{
-        return await User.create(student) 
+        return  User.create(student) 
     }
    async findByEmail(email:string):Promise<IUser|null>{
-     return  await User.findOne({email})
+     return   User.findOne({email})
    }
    async findById(_id:string):Promise<IUser|null>{
-    return await User.findById(_id)
+    return  User.findById(_id)
    }
 
    async updateStudent(_id:string,student:Partial<IUser>):Promise<IUser|null>{
-    return await User.findByIdAndUpdate(_id, student, {new:true})
+    
+    return  User.findByIdAndUpdate(_id, student, {new:true})
    }
 
 }

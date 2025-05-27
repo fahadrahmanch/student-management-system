@@ -10,11 +10,11 @@ export class studentService implements IstudentService{
     }
 
     // create student service
-   async createStudent(student: IUser): Promise<IUser|string> {
+   async createStudent(student: IUser): Promise<IUser> {
         const ifexistingStudent= await this.StudentRepository.findByEmail(student.email)
         if(ifexistingStudent){
-            // throw new Error("A student with this email already exists.")
-            return "A student with this email already exists"
+            throw new Error("A student with this email already exists.")
+           
         }
         const hashPassword =await this.bycrpt.hashPassword(student.password)
         student.password=hashPassword
@@ -29,6 +29,9 @@ export class studentService implements IstudentService{
         if(!studentExist){
             throw new Error("student not exist")
         }
+        
+        const hashPassword =await this.bycrpt.hashPassword(studentExist.password)
+        student.password=hashPassword
         return this.StudentRepository.updateStudent(_id,student)
     }
 
@@ -40,7 +43,6 @@ export class studentService implements IstudentService{
             throw new Error("user not exist")
         }
         const matchPassword= await this.bycrpt.comparePassword(password,studentData.password)
-        console.log(matchPassword)
         if(!matchPassword){ 
             throw new Error("Invalid password")
         }

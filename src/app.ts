@@ -1,4 +1,5 @@
 import express, {Application}from 'express'
+import session from 'express-session';
 import dotenv from 'dotenv'
 import {connectDB} from './config/db'
 import {StudentRouter} from './routes/studentRouter'
@@ -19,9 +20,18 @@ export class app{
         this.adminRouter()
     }
     public setMiddlewares(){
-        console.log("setMiddlewares")
+
         this.app.use(express.json())
         this.app.use(express.urlencoded({ extended: true }));
+        this.app.use(session({
+            secret: 'your-secret-key',
+            resave: false,
+            saveUninitialized: false,
+            cookie: {
+              secure: false,      // true if using HTTPS
+              maxAge: 1000 * 60 * 60 // 1 hour
+            }
+          }));
     }
     public async loadDatabase():Promise<void>{
         const db=new connectDB()

@@ -23,16 +23,26 @@ export class adminServices implements IadminService{
         return admin
 
     }
-    // async listStudents():Promise<IUser[]> {
-    //     return this.adminRepository
-    // }
-     // updateStudent(id: string, student: IUser): Promise<Partial<IUser> | null> {
-        
-    // }
-    // deleteStudent(id: string): Promise<IUser | null> {
-        
-    // }
-    // listStudents(): Promise<IUser[]> {
-        
-    // }
+    async listStudents():Promise<IUser[]> {
+        return this.adminRepository.listStudents()
+    }
+
+    async deleteStudent(id:string):Promise<IUser | null>{
+        const student= await this.adminRepository.findById(id)
+        console.log(student)
+        if(!student){
+            throw new Error("Student not found")
+        }
+        return this.adminRepository.deleteStudent(id)
+    }
+    async updateStudent(id: string, student: Partial<IUser>): Promise<Partial<IUser> | null> {
+        const studentData=await this.adminRepository.findById(id)
+        if(!studentData){
+            throw new Error("student not exist")
+        }
+        const hashPassword =await this.bycrpt.hashPassword(studentData.password)
+        student.password=hashPassword
+        return this.adminRepository.updateStudent(id,student)
+    }
+  
 }
